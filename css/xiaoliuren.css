@@ -1,0 +1,231 @@
+/* ============================================================
+   小六壬起课 · 页面样式（依赖 site.css 的令牌）
+   ============================================================ */
+
+/* ---------- 起课方式切换 ---------- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 12px;
+  padding: 4px;
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.tab {
+  flex: 1;
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 9px;
+  padding: 10px 4px;
+  font-size: 13.5px;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink-2);
+  transition: .18s var(--ease);
+  white-space: nowrap;
+}
+.tab:hover { color: var(--ink); background: color-mix(in srgb, var(--jade) 8%, transparent); }
+.tab.active {
+  background: var(--card);
+  color: var(--jade);
+  border-color: color-mix(in srgb, var(--jade) 35%, var(--line));
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(47, 93, 58, .12);
+}
+[data-theme="dark"] .tab.active { color: var(--jade); }
+
+/* ---------- 表单 ---------- */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 13.5px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: .3px;
+}
+.field input, .field select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: inherit;
+  transition: border-color .18s, box-shadow .18s;
+}
+.field input::placeholder { color: var(--muted); opacity: .7; }
+.field input:focus, .field select:focus {
+  outline: none;
+  border-color: var(--jade);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--jade) 14%, transparent);
+}
+.field-row { display: flex; gap: 10px; }
+.field-row .field { flex: 1; }
+
+.panel-actions { display: flex; gap: 8px; }
+.panel-actions .btn { flex: 1; }
+
+/* ---------- 结果 ---------- */
+.result-box {
+  background:
+    radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--jade) 7%, transparent), transparent 62%),
+    var(--card);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--line));
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  box-shadow: var(--shadow);
+  animation: rise .32s var(--ease);
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.result-name {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 8vw, 38px);
+  font-weight: 800;
+  color: var(--jade);
+  letter-spacing: 8px;
+  margin: 2px 0 4px;
+  text-indent: 8px;
+}
+.result-sub {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 18px;
+  letter-spacing: .5px;
+}
+
+.palace-grid { display: flex; flex-direction: column; gap: 10px; }
+
+.palace-card {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--jade);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--card-soft);
+}
+.palace-card.ren {
+  border-left-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 7%, var(--card));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 20%, transparent);
+}
+.palace-card .p-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.palace-card .p-name {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--jade);
+  letter-spacing: 1px;
+}
+.palace-card.ren .p-name { color: var(--gold); }
+.palace-card .p-tag {
+  font-size: 11.5px;
+  background: var(--jade-soft);
+  border-radius: 999px;
+  padding: 3px 10px;
+  color: var(--jade);
+  border: 1px solid color-mix(in srgb, var(--jade) 22%, transparent);
+  white-space: nowrap;
+}
+.palace-card.ren .p-tag {
+  background: color-mix(in srgb, var(--gold) 15%, transparent);
+  color: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 30%, transparent);
+}
+.palace-card .p-meta { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+.palace-card .p-key { font-size: 14px; margin-top: 7px; color: var(--ink); }
+
+/* ---------- 推算过程 ---------- */
+.steps {
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.steps div { margin: 5px 0; }
+.steps .steps-note { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 12.5px; }
+
+/* ---------- 速查表 ---------- */
+.quick-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  margin: 8px 0 6px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.quick-table th, .quick-table td {
+  border: 1px solid var(--line);
+  padding: 8px 5px;
+  text-align: center;
+  white-space: nowrap;
+}
+.quick-table th {
+  background: var(--jade-soft);
+  color: var(--jade);
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.quick-table tbody tr:nth-child(even) { background: var(--card-soft); }
+.quick-table td strong { color: var(--ink); }
+
+/* 可横向滚动的表格容器（窄屏） */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -2px; }
+
+/* ---------- 折叠区 ---------- */
+details {
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 13px;
+  margin: 10px 0;
+  font-size: 13.5px;
+}
+details[open] { padding-bottom: 12px; }
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--jade);
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "＋ "; color: var(--gold); font-weight: 700; }
+details[open] summary::before { content: "－ "; }
+
+.ref-list { margin: 6px 0 0; padding-left: 18px; }
+.ref-list li { margin: 5px 0; color: var(--ink-2); }
+
+/* ---------- 错误 ---------- */
+.error {
+  color: var(--seal);
+  font-size: 14px;
+  background: var(--seal-soft);
+  border: 1px solid color-mix(in srgb, var(--seal) 30%, transparent);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+/* ---------- 小屏 ---------- */
+@media (max-width: 380px) {
+  .tabs { gap: 4px; padding: 3px; }
+  .tab { font-size: 12.5px; padding: 9px 2px; }
+  .result-name { letter-spacing: 4px; }
+}

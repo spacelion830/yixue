@@ -1,0 +1,292 @@
+/* ============================================================
+   周易六爻起卦 · 页面样式（依赖 site.css 的令牌）
+   ============================================================ */
+
+/* ---------- 逐爻录入 ---------- */
+.progress {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: .5px;
+}
+
+.line-card {
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 13px;
+  margin-bottom: 12px;
+  background: var(--card-soft);
+  transition: border-color .2s var(--ease), background .2s var(--ease), box-shadow .2s;
+}
+.line-card.current {
+  border-color: var(--seal);
+  border-style: solid;
+  background: var(--seal-soft);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--seal) 10%, transparent);
+}
+
+.line-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.line-status { font-size: 12px; font-weight: 400; color: var(--muted); }
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 430px) {
+  .options { grid-template-columns: repeat(2, 1fr); }
+}
+
+.opt {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 10px;
+  padding: 10px 4px;
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+  cursor: pointer;
+  transition: .15s var(--ease);
+  font-family: inherit;
+  color: var(--ink);
+}
+.opt small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.opt:hover { border-color: color-mix(in srgb, var(--seal) 45%, var(--line)); }
+.opt.active {
+  border-color: var(--seal);
+  background: var(--seal-soft);
+  color: var(--seal);
+  font-weight: 600;
+}
+.opt.active small { color: color-mix(in srgb, var(--seal) 75%, var(--muted)); }
+
+.toolbar { display: flex; gap: 10px; margin-top: 8px; }
+.toolbar .btn { flex: 1; }
+
+/* ---------- 结果 ---------- */
+.result-box {
+  background:
+    radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--gold) 7%, transparent), transparent 60%),
+    var(--card);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--line));
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.result-title { text-align: center; margin-bottom: 14px; }
+.result-title .gua-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 6vw, 30px);
+  font-weight: 800;
+  color: var(--seal);
+  letter-spacing: 4px;
+}
+.result-title .gua-image {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+
+.hexagrams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.hex-block { text-align: center; }
+.hex-block .caption { font-size: 12.5px; color: var(--muted); margin-bottom: 7px; letter-spacing: 1px; }
+
+.hexagram {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 12px;
+  background: color-mix(in srgb, var(--gold) 5%, var(--card-soft));
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.hx-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 12px;
+}
+.hx-line .bar {
+  background: var(--ink);
+  height: 10px;
+  border-radius: 2px;
+  opacity: .82;
+}
+.hx-line.yang .bar { width: 84px; }
+.hx-line.yin .bar { width: 36px; }
+.hx-line.yin .bar:last-child { margin-left: 12px; }
+
+.hx-line.moving {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 60%, transparent);
+  border-radius: 4px;
+  padding: 1px 4px;
+  background: color-mix(in srgb, var(--gold) 14%, transparent);
+}
+.hx-line.moving .bar { background: var(--seal); opacity: 1; }
+
+.hx-mark {
+  position: absolute;
+  right: -17px;
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.arrow { font-size: 22px; color: var(--muted); }
+
+.moving-info {
+  text-align: center;
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.moving-info strong { color: var(--seal); }
+
+/* ---------- 关联卦象 ---------- */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 10px 0 16px;
+}
+.related-item {
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 13px;
+}
+.related-item .hexagram { padding: 8px; gap: 4px; border: none; background: transparent; }
+.related-item .hx-line { width: 52px; height: 9px; }
+.related-item .hx-line .bar { height: 7px; }
+.related-item .hx-line.yang .bar { width: 52px; }
+.related-item .hx-line.yin .bar { width: 22px; }
+.related-item .hx-line.yin .bar:last-child { margin-left: 8px; }
+.related-item .rel-name { font-weight: 700; color: var(--seal); margin-top: 7px; font-family: var(--font-serif); }
+.related-item .rel-image { color: var(--muted); font-size: 11.5px; line-height: 1.4; margin-top: 2px; }
+
+/* ---------- 卦辞 / 爻辞 ---------- */
+.guaci {
+  background: color-mix(in srgb, var(--gold) 6%, var(--card-soft));
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.guaci strong { color: var(--seal); }
+
+.line-list { list-style: none; margin: 0; padding: 0; }
+.line-list li {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+.line-list li:last-child { border-bottom: none; }
+.line-list li.moving {
+  background: color-mix(in srgb, var(--gold) 9%, transparent);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  font-weight: 600;
+}
+.line-list .line-name { color: var(--seal); font-weight: 700; margin-right: 6px; }
+.line-list .image-text {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ---------- 折叠区 ---------- */
+details {
+  background: var(--card-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 13px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+details[open] { padding-bottom: 13px; }
+details p { margin: 8px 0 0; color: var(--ink-2); line-height: 1.8; }
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--seal);
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "＋ "; color: var(--gold); font-weight: 700; }
+details[open] summary::before { content: "－ "; }
+
+/* ---------- 装卦 ---------- */
+.shi-ying {
+  display: inline-block;
+  font-size: 11px;
+  background: color-mix(in srgb, var(--gold) 18%, transparent);
+  color: color-mix(in srgb, var(--gold) 80%, var(--ink));
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  font-weight: 600;
+  vertical-align: 1px;
+}
+
+/* ---------- 外链 ---------- */
+.source-link, .source-link:visited {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--seal);
+  font-size: 13.5px;
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 1px;
+}
+.source-link:hover { opacity: .8; }
+
+/* ---------- 小屏微调 ---------- */
+@media (max-width: 430px) {
+  .result-box { padding: 14px; }
+  .hexagrams { gap: 10px; }
+  .hexagram { padding: 10px; }
+  .hx-line { width: 74px; }
+  .hx-line.yang .bar { width: 74px; }
+  .related-grid { gap: 8px; }
+  .related-item { padding: 8px 4px; }
+}
