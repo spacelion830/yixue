@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f1e6">
+<meta name="description" content="周易六爻起卦：掷三枚硬币录入六爻，自动排本卦变卦、互错综卦，展示卦辞爻辞与六爻装卦。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<title>周易六爻起卦 · 易学斋</title>
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/zhouyi.css">
+</head>
+<body data-page="zhouyi" class="theme-zhouyi">
+
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-nav">
+  <a class="brand" href="index.html" aria-label="易学斋首页">
+    <span class="seal" aria-hidden="true">易</span>
+    <span class="brand-text">易学斋</span>
+    <span class="brand-sub">传统术数</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="index.html" data-page="home">首页</a>
+    <a href="zhouyi.html" data-page="zhouyi">周易六爻</a>
+    <a href="xiaoliuren.html" data-page="xiaoliuren">小六壬</a>
+  </nav>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="切换主题">☾</button>
+</header>
+
+<div class="page-hero">
+  <h1>周易<span class="accent">六爻</span></h1>
+  <p>现实掷三枚硬币，录六爻，自动排卦并定位《周易》原文</p>
+  <div class="chips">
+    <span class="chip">本卦 · 变卦</span>
+    <span class="chip">互卦 · 错卦 · 综卦</span>
+    <span class="chip gold">六爻装卦</span>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+
+  <section class="card">
+    <h2>掷币规则</h2>
+    <div class="note">
+      传统钱筮法：每次同时掷<strong>三枚硬币</strong>，掷 6 次，从下往上记第 1 爻到第 6 爻。
+      以「背」为阳、「字」为阴：
+      <ul>
+        <li><strong>3 个字</strong>：老阴（动爻，记 ×）</li>
+        <li><strong>1 背 2 字</strong>：少阳（静爻）</li>
+        <li><strong>2 背 1 字</strong>：少阴（静爻）</li>
+        <li><strong>3 个背</strong>：老阳（动爻，记 ○）</li>
+      </ul>
+      若你习惯自定义正反面为阴阳，请保持前后一致；程序只按你录入的「背／字」组合排卦。
+    </div>
+  </section>
+
+  <section class="card" id="inputPanel">
+    <h2>录入六爻</h2>
+    <div class="progress" id="progress">已输入 0 / 6</div>
+    <div id="lineCards"></div>
+    <div class="toolbar">
+      <button class="btn" id="undoBtn" type="button">删除最后一爻</button>
+      <button class="btn" id="clearBtn" type="button">清空</button>
+      <button class="btn" id="randomBtn" type="button" title="不方便掷币时用随机数模拟一次">随机模拟</button>
+    </div>
+    <p class="hint">「随机模拟」只是方便体验，正式占问仍建议亲手掷币。</p>
+  </section>
+
+  <section id="resultPanel" class="hidden">
+    <div class="result-tools">
+      <button class="btn small" id="saveBtn" type="button">保存记录</button>
+      <button class="btn small" id="copyBtn" type="button">复制全文</button>
+      <button class="btn small" id="printBtn" type="button">打印</button>
+      <button class="btn small" id="resetBtn" type="button">重新起卦</button>
+    </div>
+    <div class="result-box" id="resultBox"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-brand">易 学 斋</p>
+  <p>周易六爻 · 小六壬 · 纯静态网页，记录只存在本机浏览器</p>
+  <p>内容整理自传统典籍与公开资料，仅供文化研究与娱乐参考，不构成任何决策依据。</p>
+  <p><a href="index.html">返回首页</a></p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data/yijing-data.js"></script>
+<script src="data/zhuang-gua-data.js"></script>
+<script src="js/site.js"></script>
+<script src="js/zhouyi.js"></script>
+<script>
+(function () {
+  "use strict";
+  var resultPanel = document.getElementById("resultPanel");
+  var resultBox = document.getElementById("resultBox");
+
+  function getState() { return window.ZY && window.ZY.getState ? window.ZY.getState() : null; }
+
+  document.getElementById("randomBtn").addEventListener("click", function () {
+    if (!window.ZY || !window.ZY.randomFill) return;
+    window.ZY.randomFill();
+    Site.toast("已随机模拟一次");
+  });
+
+  document.getElementById("saveBtn").addEventListener("click", function () {
+    var st = getState();
+    if (!st) { Site.toast("还没有完整的卦"); return; }
+    Site.store.add({ app: "zhouyi", title: st.title, sub: st.sub, payload: st.lines });
+    Site.toast("已保存到本机记录");
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    if (!resultBox.textContent.trim()) { Site.toast("还没有结果可复制"); return; }
+    Site.copy(resultBox.innerText).then(function (ok) {
+      Site.toast(ok ? "已复制全文" : "复制失败，请长按选择");
+    });
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
+
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    document.getElementById("clearBtn").click();
+    document.getElementById("inputPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+    Site.toast("已清空，可重新掷币");
+  });
+
+  // 从首页记录点进来：#h=<id>
+  var m = /^#h=([\w-]+)$/.exec(location.hash || "");
+  if (m) {
+    var item = Site.store.get(m[1]);
+    if (item && item.payload && window.ZY && window.ZY.restore) {
+      setTimeout(function () {
+        window.ZY.restore(item.payload);
+        Site.toast("已载入历史记录");
+        resultPanel.classList.remove("hidden");
+      }, 60);
+    }
+  }
+})();
+</script>
+</body>
+</html>

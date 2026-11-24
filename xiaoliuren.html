@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f1e6">
+<meta name="description" content="小六壬起课：农历月日时、三个数字、时刻分三种起课方式，天地人三宫，以人宫定吉凶，附六宫断语与寻物方位速查。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<title>小六壬起课 · 易学斋</title>
+<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/xiaoliuren.css">
+</head>
+<body data-page="xiaoliuren" class="theme-xiaoliuren">
+
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-nav">
+  <a class="brand" href="index.html" aria-label="易学斋首页">
+    <span class="seal" aria-hidden="true">易</span>
+    <span class="brand-text">易学斋</span>
+    <span class="brand-sub">传统术数</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="index.html" data-page="home">首页</a>
+    <a href="zhouyi.html" data-page="zhouyi">周易六爻</a>
+    <a href="xiaoliuren.html" data-page="xiaoliuren">小六壬</a>
+  </nav>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="切换主题">☾</button>
+</header>
+
+<div class="page-hero">
+  <h1>小六壬<span class="accent">起课</span></h1>
+  <p>道家小六壬神通（邵伟成版）· 天地人三宫 · 以人宫定吉凶</p>
+  <div class="chips">
+    <span class="chip">三宫起课</span>
+    <span class="chip">六宫速查</span>
+    <span class="chip gold">0 按十处理</span>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+
+  <section class="card">
+    <h2>选择起课方式</h2>
+    <div class="note">
+      小六壬由<strong>天宫、地宫、人宫</strong>三宫组成，<strong>吉凶以人宫为准</strong>。
+      数字起卦时 0 按「十」处理。不同流派口诀差别很大，本页只按邵伟成版，请勿混学。
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab active" id="tabMonthDayHour" type="button" role="tab" aria-selected="true">农历月日时</button>
+      <button class="tab" id="tabThreeNumbers" type="button" role="tab" aria-selected="false">三个数字</button>
+      <button class="tab" id="tabTime" type="button" role="tab" aria-selected="false">时刻分</button>
+    </div>
+
+    <div id="panelMonthDayHour">
+      <div class="note">古法：月→天宫，日→地宫，时→人宫。天宫从大安起，地宫从天宫落宫起，人宫从地宫落宫起。</div>
+      <div class="field">
+        <label for="lunarMonth">农历月</label>
+        <input type="number" id="lunarMonth" min="1" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="lunarDay">农历日</label>
+        <input type="number" id="lunarDay" min="1" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="shichen">时辰</label>
+        <select id="shichen">
+          <option value="1">子时（23:00-1:00）</option>
+          <option value="2">丑时（1:00-3:00）</option>
+          <option value="3">寅时（3:00-5:00）</option>
+          <option value="4">卯时（5:00-7:00）</option>
+          <option value="5">辰时（7:00-9:00）</option>
+          <option value="6">巳时（9:00-11:00）</option>
+          <option value="7">午时（11:00-13:00）</option>
+          <option value="8">未时（13:00-15:00）</option>
+          <option value="9">申时（15:00-17:00）</option>
+          <option value="10">酉时（17:00-19:00）</option>
+          <option value="11">戌时（19:00-21:00）</option>
+          <option value="12">亥时（21:00-23:00）</option>
+        </select>
+      </div>
+      <button class="btn primary" id="calcMonthDayHour" type="button">起课</button>
+    </div>
+
+    <div id="panelThreeNumbers" class="hidden">
+      <div class="note">取第一时间看到的三位数，例如车牌尾号、门牌号、房间号。0 按 10 处理。</div>
+      <div class="field">
+        <label for="num1">第一个数（天宫）</label>
+        <input type="number" id="num1" min="0" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="num2">第二个数（地宫）</label>
+        <input type="number" id="num2" min="0" value="1" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="num3">第三个数（人宫）</label>
+        <input type="number" id="num3" min="0" value="1" inputmode="numeric">
+      </div>
+      <button class="btn primary" id="calcThreeNumbers" type="button">起课</button>
+    </div>
+
+    <div id="panelTime" class="hidden">
+      <div class="note">以起心动念那一刻起卦：天宫按时辰，地宫按整刻（15 分钟 1 刻），人宫按余分钟。</div>
+      <div class="field-row">
+        <div class="field">
+          <label for="hour">小时（0-23）</label>
+          <input type="number" id="hour" min="0" max="23" value="12" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="minute">分钟（0-59）</label>
+          <input type="number" id="minute" min="0" max="59" value="0" inputmode="numeric">
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn primary" id="calcTime" type="button">起课</button>
+        <button class="btn" id="nowBtn" type="button">用现在时间</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="resultPanel" class="hidden">
+    <div class="result-tools">
+      <button class="btn small" id="saveBtn" type="button">保存记录</button>
+      <button class="btn small" id="copyBtn" type="button">复制全文</button>
+      <button class="btn small" id="printBtn" type="button">打印</button>
+    </div>
+    <div class="result-box" id="resultBox"></div>
+  </section>
+
+  <section class="card">
+    <h2>六宫断语速查</h2>
+    <div class="table-scroll" id="quickRef"></div>
+    <details>
+      <summary>寻物方位速查</summary>
+      <ul class="ref-list">
+        <li><strong>大安</strong>：东方，木制品、衣物、植物、绿色事物旁</li>
+        <li><strong>留连</strong>：东南／四偏位，有遮挡、低矮、杂乱（柜缝、床底）</li>
+        <li><strong>速喜</strong>：南方、高处，红色物品、书信书本、电器</li>
+        <li><strong>赤口</strong>：西方，白色、金属、玻璃、有缺口、口袋</li>
+        <li><strong>小吉</strong>：北方，水边、厕所、水池、黑蓝色物品旁</li>
+        <li><strong>空亡</strong>：中央，盒子、袋子、柜子、四四方方之处</li>
+      </ul>
+    </details>
+    <details>
+      <summary>天气速查</summary>
+      <ul class="ref-list">
+        <li><strong>大安</strong>：晴天</li>
+        <li><strong>留连</strong>：细雨、雾</li>
+        <li><strong>速喜</strong>：晴天</li>
+        <li><strong>赤口</strong>：暴雨（冬天可为雪或冰雹）</li>
+        <li><strong>小吉</strong>：雨（冬天／北方可为雪）</li>
+        <li><strong>空亡</strong>：阴天</li>
+      </ul>
+    </details>
+    <details>
+      <summary>取数十法（手册附录）</summary>
+      <ul class="ref-list">
+        <li>排位优先法：问顺序、名次优先取排位数</li>
+        <li>性别阴阳法：男取阳数，女取阴数</li>
+        <li>事件属性法：快事取小数，慢事取大数</li>
+        <li>季节旺衰法：按季节旺衰取数</li>
+        <li>生克取向法：体用生克决定大小数</li>
+        <li>外应合参法：见三人取 3，闻四声取 4</li>
+        <li>直觉感应法：第一瞬间心中数字最准</li>
+        <li>隐藏周期法：基础数不符时加 6 循环</li>
+        <li>组合象意法：多位数可按组合象意取</li>
+        <li>循环使用法：大范围取数循环使用</li>
+      </ul>
+    </details>
+    <div class="note" style="margin-top:12px">
+      完整口诀与案例见 <a href="manuals/小六壬零基础学习手册.docx" download>《小六壬零基础学习手册》</a>。
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-brand">易 学 斋</p>
+  <p>周易六爻 · 小六壬 · 纯静态网页，记录只存在本机浏览器</p>
+  <p>内容整理自传统典籍与公开资料，仅供文化研究与娱乐参考，不构成任何决策依据。</p>
+  <p><a href="index.html">返回首页</a></p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/site.js"></script>
+<script src="js/xiaoliuren.js"></script>
+<script>
+(function () {
+  "use strict";
+  var resultPanel = document.getElementById("resultPanel");
+  var resultBox = document.getElementById("resultBox");
+
+  // 用现在时间填表并起课
+  document.getElementById("nowBtn").addEventListener("click", function () {
+    var d = new Date();
+    document.getElementById("hour").value = d.getHours();
+    document.getElementById("minute").value = d.getMinutes();
+    document.getElementById("calcTime").click();
+  });
+
+  document.getElementById("saveBtn").addEventListener("click", function () {
+    var st = window.XLR && window.XLR.getState ? window.XLR.getState() : null;
+    if (!st) { Site.toast("还没有起课"); return; }
+    Site.store.add({ app: "xiaoliuren", title: st.title, sub: st.sub, payload: st.payload });
+    Site.toast("已保存到本机记录");
+  });
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    if (!resultBox.textContent.trim()) { Site.toast("还没有结果可复制"); return; }
+    Site.copy(resultBox.innerText).then(function (ok) {
+      Site.toast(ok ? "已复制全文" : "复制失败，请长按选择");
+    });
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function () { window.print(); });
+
+  // 从首页记录点进来：#h=<id>
+  var m = /^#h=([\w-]+)$/.exec(location.hash || "");
+  if (m) {
+    var item = Site.store.get(m[1]);
+    if (item && item.payload && window.XLR && window.XLR.restore) {
+      setTimeout(function () {
+        window.XLR.restore(item.payload);
+        Site.toast("已载入历史记录");
+        resultPanel.classList.remove("hidden");
+      }, 60);
+    }
+  }
+})();
+</script>
+</body>
+</html>

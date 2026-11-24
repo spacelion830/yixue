@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f1e6">
+<meta name="description" content="易学斋：周易六爻起卦与小六壬起课，两个传统术数工具的合并站点，纯静态、可离线使用。">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<title>易学斋 · 周易六爻与小六壬</title>
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body data-page="home">
+
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-nav">
+  <a class="brand" href="index.html" aria-label="易学斋首页">
+    <span class="seal" aria-hidden="true">易</span>
+    <span class="brand-text">易学斋</span>
+    <span class="brand-sub">传统术数</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="index.html" data-page="home">首页</a>
+    <a href="zhouyi.html" data-page="zhouyi">周易六爻</a>
+    <a href="xiaoliuren.html" data-page="xiaoliuren">小六壬</a>
+  </nav>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="切换主题">☾</button>
+</header>
+
+<div class="page-hero">
+  <h1>易<span class="accent">学</span>斋</h1>
+  <p>两门传统术数，一处安放：六爻观卦象，小六壬断人事</p>
+  <div class="chips">
+    <span class="chip">纯静态 · 可离线</span>
+    <span class="chip">手机优先</span>
+    <span class="chip gold">记录存本机</span>
+  </div>
+</div>
+
+<main id="main" class="wrap wrap-wide">
+
+  <div class="hub-grid">
+
+    <a class="hub-card theme-zhouyi" href="zhouyi.html">
+      <div class="hub-head">
+        <span class="mini-hex" style="color:var(--seal)" aria-hidden="true">
+          <i class="yin"></i><i></i><i class="yin"></i><i></i><i class="yin"></i><i></i>
+        </span>
+        <span class="hub-title">周易六爻</span>
+        <span class="hub-badge">六十四卦</span>
+      </div>
+      <p>掷三枚硬币录六爻，自动排本卦变卦、互错综卦，附卦辞爻辞、彖象传与六爻装卦（八宫·世应·纳甲·六亲）。</p>
+      <div class="hub-foot">开始起卦 <span class="arrow">→</span></div>
+    </a>
+
+    <a class="hub-card theme-xiaoliuren" href="xiaoliuren.html">
+      <div class="hub-head">
+        <span class="mini-lists" aria-hidden="true">
+          <span>安</span><span>留</span><span>喜</span><span>口</span><span>吉</span><span>空</span>
+        </span>
+        <span class="hub-title">小六壬</span>
+        <span class="hub-badge">天地人三宫</span>
+      </div>
+      <p>农历月日时、随手三个数字、或当下时刻，三种起课方式；三宫落位，以人宫定吉凶，附六宫断语与寻物方位速查。</p>
+      <div class="hub-foot">开始起课 <span class="arrow">→</span></div>
+    </a>
+
+  </div>
+
+  <section class="card" style="margin-top:16px">
+    <h2>最近记录 <span id="recordCount" style="font-size:12px;font-weight:400;color:var(--muted)"></span></h2>
+    <div id="recordList"></div>
+    <button class="btn small ghost hidden" id="clearRecords" type="button" style="margin-top:12px;color:var(--muted)">清空本机记录</button>
+    <div class="note" style="margin-bottom:0">记录只保存在这台设备的浏览器里，不上传、不同步；清除浏览器数据会一并清空。</div>
+  </section>
+
+  <section class="card">
+    <h2>学习资料</h2>
+    <a class="res-item" href="manuals/小六壬零基础学习手册.docx" download>
+      <span class="res-icon" aria-hidden="true">📜</span>
+      <span>
+        <span class="res-name">小六壬零基础学习手册</span>
+        <span class="res-meta">邵伟成版完整教程 · 约 1.1 万字 · Word 文档</span>
+      </span>
+    </a>
+    <div class="note" style="margin-bottom:0">周易六爻的六十四卦原文与装卦数据已内置于网页，无需联网查阅。</div>
+  </section>
+
+  <section class="card">
+    <h2>使用提醒</h2>
+    <div class="note" style="margin-bottom:0">
+      两套体系各自成法、不宜混学：六爻重卦象与用神，小六壬重三宫与掌诀。
+      本页只做传统术数的整理与演示，结果仅供文化研究与娱乐参考，<strong>不构成任何决策依据</strong>，请勿用于医疗、投资、法律等现实判断。
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="footer-brand">易 学 斋</p>
+  <p>周易六爻 · 小六壬 · 纯静态网页，记录只存在本机浏览器</p>
+  <p>内容整理自传统典籍与公开资料，仅供文化研究与娱乐参考，不构成任何决策依据。</p>
+</footer>
+
+<button class="to-top" id="toTop" type="button" aria-label="回到顶部">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/site.js"></script>
+</body>
+</html>
